@@ -25,8 +25,10 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
 	public void receiveMessage(MessageInfo msg) throws RemoteException {
 		// TODO: On receipt of first message, initialise the receive buffer
-		if(msg.messageNum == 1)
+		if(msg.messageNum == 1) {
+			totalMessages = 0;
 			receivedMessages = new int[msg.totalMessages];
+		}
 
 		totalMessages++;
 
@@ -35,18 +37,18 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		//  receivedMessages = new int[msg.totalMessages];
 
 		// TODO: Log receipt of the messages
-		receivedMessages[totalMessages] = msg.messageNum;
+		receivedMessages[totalMessages - 1] = msg.messageNum;
 
 		// TODO: If this is the last expected message, then identify
 		//        any missing messages
 
 		if(msg.messageNum == msg.totalMessages) {
-			for(int i = 0; i < totalMessages + 1; ++i)
+			for(int i = 0; i < totalMessages; ++i)
 				System.out.println("Receieved Message: " + Integer.toString(receivedMessages[i]) + " out of " + Integer.toString(msg.totalMessages));
 			System.out.println("#######################################");
-			System.out.println("Messages received: " + Integer.toString(totalMessages + 1));
+			System.out.println("Messages received: " + Integer.toString(totalMessages));
 			System.out.println("Total messages sent: " + Integer.toString(msg.totalMessages));
-			System.out.println("Success rate: " + Double.toString((double)(totalMessages + 1) / (double)(msg.totalMessages) * 100.0) + "%");
+			System.out.println("Success rate: " + Double.toString((double)totalMessages / (double)msg.totalMessages * 100.0) + "%");
 			totalMessages = -1;
 		}
 	}
