@@ -43,7 +43,6 @@ public class RMIClient {
 			MessageInfo msg = new MessageInfo(numMessages, i);
 			try {
 				iRMIServer.receiveMessage(msg);
-				System.out.println("Successfully sent msg: " + Integer.toString(i));
 			} catch(Exception e) {
 				System.err.println("RMIClient exception:");
 				e.printStackTrace();
