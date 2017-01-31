@@ -41,7 +41,6 @@ public class RMIClient {
 			MessageInfo msg = new MessageInfo(numMessages, i);
 			try {
 				iRMIServer.receiveMessage(msg);
-				System.out.println("Sent Message: " + Integer.toString(i + 1) + " out of " + Integer.toString(numMessages));
 			} catch(Exception e) {
 				System.err.println("RMIClient exception:");
 				e.printStackTrace();

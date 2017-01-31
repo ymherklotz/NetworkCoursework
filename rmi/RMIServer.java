@@ -33,10 +33,8 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		// increment the total messages when a new call is made
 		totalMessages++;
 
-		System.out.println("Receieved Message: " + Integer.toString(msg.messageNum + 1) + " out of " + Integer.toString(msg.totalMessages));
-
 		// buffer the incomming messages
-		receivedMessages[totalMessages - 1] = msg.messageNum;
+		receivedMessages[msg.messageNum] = 1;
 
 		// when last expected message was sent, see which ones were lost
 		if(msg.messageNum == msg.totalMessages - 1) {
@@ -46,6 +44,13 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 			System.out.println("Messages received: " + Integer.toString(totalMessages));
 			System.out.println("Total messages sent: " + Integer.toString(msg.totalMessages));
 			System.out.println("Success rate: " + Double.toString((double)totalMessages / (double)msg.totalMessages * 100.0) + "%");
+			if(totalMessages != msg.totalMessages) {
+				System.out.println("#######################################");
+				System.out.println("Messages lost: ");
+				for(int i = 0; i < msg.totalMessages; ++i)
+					if(receivedMessages[i] != 1)
+						System.out.println("Message " + Integer.toString(i) + " out of " + Integer.toString(msg.totalMessages));
+			}
 			totalMessages = -1;
 		}
 	}
