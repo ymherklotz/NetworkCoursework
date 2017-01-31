@@ -1,0 +1,162 @@
+RMIServer bound
+RMIServer ready
+#######################################
+Messages received: 50
+Total messages sent: 50
+Success rate: 100.0%
+#######################################
+Messages received: 100
+Total messages sent: 100
+Success rate: 100.0%
+#######################################
+Messages received: 150
+Total messages sent: 150
+Success rate: 100.0%
+#######################################
+Messages received: 200
+Total messages sent: 200
+Success rate: 100.0%
+#######################################
+Messages received: 250
+Total messages sent: 250
+Success rate: 100.0%
+#######################################
+Messages received: 300
+Total messages sent: 300
+Success rate: 100.0%
+#######################################
+Messages received: 350
+Total messages sent: 350
+Success rate: 100.0%
+#######################################
+Messages received: 400
+Total messages sent: 400
+Success rate: 100.0%
+#######################################
+Messages received: 450
+Total messages sent: 450
+Success rate: 100.0%
+#######################################
+Messages received: 500
+Total messages sent: 500
+Success rate: 100.0%
+#######################################
+Messages received: 550
+Total messages sent: 550
+Success rate: 100.0%
+#######################################
+Messages received: 600
+Total messages sent: 600
+Success rate: 100.0%
+#######################################
+Messages received: 650
+Total messages sent: 650
+Success rate: 100.0%
+#######################################
+Messages received: 700
+Total messages sent: 700
+Success rate: 100.0%
+#######################################
+Messages received: 750
+Total messages sent: 750
+Success rate: 100.0%
+#######################################
+Messages received: 800
+Total messages sent: 800
+Success rate: 100.0%
+#######################################
+Messages received: 850
+Total messages sent: 850
+Success rate: 100.0%
+#######################################
+Messages received: 900
+Total messages sent: 900
+Success rate: 100.0%
+#######################################
+Messages received: 950
+Total messages sent: 950
+Success rate: 100.0%
+#######################################
+Messages received: 1000
+Total messages sent: 1000
+Success rate: 100.0%
+#######################################
+Messages received: 1050
+Total messages sent: 1050
+Success rate: 100.0%
+#######################################
+Messages received: 1100
+Total messages sent: 1100
+Success rate: 100.0%
+#######################################
+Messages received: 1150
+Total messages sent: 1150
+Success rate: 100.0%
+#######################################
+Messages received: 1200
+Total messages sent: 1200
+Success rate: 100.0%
+#######################################
+Messages received: 1250
+Total messages sent: 1250
+Success rate: 100.0%
+#######################################
+Messages received: 1300
+Total messages sent: 1300
+Success rate: 100.0%
+#######################################
+Messages received: 1350
+Total messages sent: 1350
+Success rate: 100.0%
+#######################################
+Messages received: 1400
+Total messages sent: 1400
+Success rate: 100.0%
+#######################################
+Messages received: 1450
+Total messages sent: 1450
+Success rate: 100.0%
+#######################################
+Messages received: 1500
+Total messages sent: 1500
+Success rate: 100.0%
+#######################################
+Messages received: 1550
+Total messages sent: 1550
+Success rate: 100.0%
+#######################################
+Messages received: 1600
+Total messages sent: 1600
+Success rate: 100.0%
+#######################################
+Messages received: 1650
+Total messages sent: 1650
+Success rate: 100.0%
+#######################################
+Messages received: 1700
+Total messages sent: 1700
+Success rate: 100.0%
+#######################################
+Messages received: 1750
+Total messages sent: 1750
+Success rate: 100.0%
+#######################################
+Messages received: 1800
+Total messages sent: 1800
+Success rate: 100.0%
+#######################################
+Messages received: 1850
+Total messages sent: 1850
+Success rate: 100.0%
+#######################################
+Messages received: 1900
+Total messages sent: 1900
+Success rate: 100.0%
+#######################################
+Messages received: 1950
+Total messages sent: 1950
+Success rate: 100.0%
+#######################################
+Messages received: 2000
+Total messages sent: 2000
+Success rate: 100.0%

@@ -64,7 +64,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 			rmis = new RMIServer();
 
 			// binding server to correct ip
-			rebindServer("//129.31.219.236/RMIServer", rmis);
+			rebindServer("//146.169.52.82/RMIServer", rmis);
 
 			System.out.println("RMIServer ready");
 		} catch(Exception e) {
