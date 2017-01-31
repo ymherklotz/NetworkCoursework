@@ -24,50 +24,40 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	}
 
 	public void receiveMessage(MessageInfo msg) throws RemoteException {
-		// TODO: On receipt of first message, initialise the receive buffer
-		// if(msg.messageNum == 0) {
-		//  totalMessages = 0;
-		//  receivedMessages = new int[msg.totalMessages];
-		// }
-		//
-		// totalMessages++;
+		// initialise the buffer when first message is received
+		if(msg.messageNum == 0) {
+			totalMessages = 0;
+			receivedMessages = new int[msg.totalMessages];
+		}
 
-		// this may be a better implementations ????
-		// if(receivedMessages == null)
-		//  receivedMessages = new int[msg.totalMessages];
+		// increment the total messages when a new call is made
+		totalMessages++;
 
-		// TODO: Log receipt of the messages
-		// receivedMessages[totalMessages - 1] = msg.messageNum;
-		System.out.println("Receieved Message: " + Integer.toString(msg.messageNum + 1) + " out of " + Integer.toString(msg.totalMessages));
+		// buffer the incomming messages
+		receivedMessages[totalMessages - 1] = msg.messageNum;
 
-		// TODO: If this is the last expected message, then identify
-		//        any missing messages
-
-		// if(msg.messageNum == msg.totalMessages - 1) {
-		//  // for(int i = 0; i < totalMessages; ++i)
-		//  // System.out.println("Receieved Message: " + Integer.toString(receivedMessages[i]) + " out of " + Integer.toString(msg.totalMessages));
-		//  System.out.println("#######################################");
-		//  System.out.println("Messages received: " + Integer.toString(totalMessages));
-		//  System.out.println("Total messages sent: " + Integer.toString(msg.totalMessages));
-		//  System.out.println("Success rate: " + Double.toString((double)totalMessages / (double)msg.totalMessages * 100.0) + "%");
-		//  totalMessages = -1;
-		// }
+		// when last expected message was sent, see which ones were lost
+		if(msg.messageNum == msg.totalMessages - 1) {
+			for(int i = 0; i < totalMessages; ++i)
+				System.out.println("Receieved Message: " + Integer.toString(receivedMessages[i] + 1) + " out of " + Integer.toString(msg.totalMessages));
+			System.out.println("#######################################");
+			System.out.println("Messages received: " + Integer.toString(totalMessages));
+			System.out.println("Total messages sent: " + Integer.toString(msg.totalMessages));
+			System.out.println("Success rate: " + Double.toString((double)totalMessages / (double)msg.totalMessages * 100.0) + "%");
+			totalMessages = -1;
+		}
 	}
 
 
 	public static void main(String[] args) {
-		// TODO: Initialise Security Manager
-		// if(System.getSecurityManager() == null)
-		//  System.setSecurityManager(new SecurityManager());
+		RMIServer rmis = null;
 
-		// TODO: Instantiate the server class
-
-		// TODO: Bind to RMI registry
 		try {
-			RMIServer rmis = new RMIServer();
+			// initialise rmiserver object
+			rmis = new RMIServer();
 
-			// Binding server
-			rebindServer("rmi://127.0.1.1/RMIServer", rmis);
+			// binding server to correct ip
+			rebindServer("//129.31.219.236/RMIServer", rmis);
 
 			System.out.println("RMIServer ready");
 		} catch(Exception e) {
@@ -77,17 +67,11 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 	}
 
 	protected static void rebindServer(String serverURL, RMIServer server) {
-		// TODO:
-		// Start / find the registry (hint use LocateRegistry.createRegistry(...)
-		// If we *know* the registry is running we could skip this (eg run rmiregistry in the start script)
-
-		// TODO:
-		// Now rebind the server to the registry (rebind replaces any existing servers bound to the serverURL)
-		// Note - Registry.rebind (as returned by createRegistry / getRegistry) does something similar but
-		// expects different things from the URL field.
 		try {
-			LocateRegistry.getRegistry();
+			// create registry at specific registry port
+			LocateRegistry.createRegistry(1099);
 
+			// rebinding server to the server url
 			Naming.rebind(serverURL, server);
 
 			System.out.println("RMIServer bound");
