@@ -25,37 +25,38 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 
 	public void receiveMessage(MessageInfo msg) throws RemoteException {
 		// TODO: On receipt of first message, initialise the receive buffer
-		if(msg.messageNum == 1) {
-			totalMessages = 0;
-			receivedMessages = new int[msg.totalMessages];
-		}
-
-		totalMessages++;
+		// if(msg.messageNum == 0) {
+		//  totalMessages = 0;
+		//  receivedMessages = new int[msg.totalMessages];
+		// }
+		//
+		// totalMessages++;
 
 		// this may be a better implementations ????
 		// if(receivedMessages == null)
 		//  receivedMessages = new int[msg.totalMessages];
 
 		// TODO: Log receipt of the messages
-		receivedMessages[totalMessages - 1] = msg.messageNum;
+		// receivedMessages[totalMessages - 1] = msg.messageNum;
+		System.out.println("Receieved Message: " + Integer.toString(msg.messageNum + 1) + " out of " + Integer.toString(msg.totalMessages));
 
 		// TODO: If this is the last expected message, then identify
 		//        any missing messages
 
-		if(msg.messageNum == msg.totalMessages) {
-			for(int i = 0; i < totalMessages; ++i)
-				System.out.println("Receieved Message: " + Integer.toString(receivedMessages[i]) + " out of " + Integer.toString(msg.totalMessages));
-			System.out.println("#######################################");
-			System.out.println("Messages received: " + Integer.toString(totalMessages));
-			System.out.println("Total messages sent: " + Integer.toString(msg.totalMessages));
-			System.out.println("Success rate: " + Double.toString((double)totalMessages / (double)msg.totalMessages * 100.0) + "%");
-			totalMessages = -1;
-		}
+		// if(msg.messageNum == msg.totalMessages - 1) {
+		//  // for(int i = 0; i < totalMessages; ++i)
+		//  // System.out.println("Receieved Message: " + Integer.toString(receivedMessages[i]) + " out of " + Integer.toString(msg.totalMessages));
+		//  System.out.println("#######################################");
+		//  System.out.println("Messages received: " + Integer.toString(totalMessages));
+		//  System.out.println("Total messages sent: " + Integer.toString(msg.totalMessages));
+		//  System.out.println("Success rate: " + Double.toString((double)totalMessages / (double)msg.totalMessages * 100.0) + "%");
+		//  totalMessages = -1;
+		// }
 	}
 
 
 	public static void main(String[] args) {
-		RMIServerI rmis = null;
+		RMIServer rmis = null;
 
 		// TODO: Initialise Security Manager
 		if(System.getSecurityManager() == null)
@@ -68,7 +69,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 			rmis = new RMIServer();
 
 			// Binding server
-			rebindServer("//127.0.0.1:1099/RMIServer", rmis);
+			rebindServer("//localhost/RMIServer", rmis);
 
 			System.out.println("RMIServer ready");
 		} catch(Exception e) {
@@ -77,7 +78,7 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		}
 	}
 
-	protected static void rebindServer(String serverURL, RMIServerI server) {
+	protected static void rebindServer(String serverURL, RMIServer server) {
 		// TODO:
 		// Start / find the registry (hint use LocateRegistry.createRegistry(...)
 		// If we *know* the registry is running we could skip this (eg run rmiregistry in the start script)
@@ -87,9 +88,9 @@ public class RMIServer extends UnicastRemoteObject implements RMIServerI {
 		// Note - Registry.rebind (as returned by createRegistry / getRegistry) does something similar but
 		// expects different things from the URL field.
 		try {
-			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+			LocateRegistry.createRegistry(1099);
 
-			Naming.rebind(serverURL, server);
+			Naming.bind(serverURL, server);
 
 			System.out.println("RMIServer bound");
 		} catch(Exception e) {
