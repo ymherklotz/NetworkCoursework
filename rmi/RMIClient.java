@@ -6,6 +6,8 @@ package rmi;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import common.MessageInfo;
 
@@ -22,10 +24,30 @@ public class RMIClient {
 		String urlServer = new String("rmi://" + args[0] + "/RMIServer");
 		int numMessages = Integer.parseInt(args[1]);
 
-		// TO-DO: Initialise Security Manager
+		// TODO: Initialise Security Manager
+		if(System.getSecurityManager() == null)
+			System.setSecurityManager(new SecurityManager());
 
-		// TO-DO: Bind to RMIServer
+		// TODO: Bind to RMIServer
+		try {
+			String name = "RMIServer";
+			Registry registry = LocateRegistry.getRegistry();
+			iRMIServer = (RMIServerI)registry.lookup(name);
+		} catch(Exception e) {
+			System.err.println("RMIClient exception:");
+			e.printStackTrace();
+		}
 
-		// TO-DO: Attempt to send messages the specified number of times
+		// TODO: Attempt to send messages the specified number of times
+		for(int i = 1; i < numMessages + 1; i++) {
+			MessageInfo msg = new MessageInfo(numMessages, i);
+			try {
+				iRMIServer.receiveMessage(msg);
+				System.out.println("Successfully sent msg: " + Integer.toString(i));
+			} catch(Exception e) {
+				System.err.println("RMIClient exception:");
+				e.printStackTrace();
+			}
+		}
 	}
 }
